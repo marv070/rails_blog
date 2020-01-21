@@ -8,5 +8,65 @@
   <%= @blog.body %>
 </p>
 
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+<%= link_to 'Edit Blog Body', edit_blog_path(@blog) %> |
+<%= link_to 'Back to List of Blogs', blogs_path %>
+
+
+<h3>User Comments about this Blog</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Submitted By:</th>
+      <th>Comment:</th>
+    </tr>
+  </thead>
+
+ <tbody>
+    <% @blog.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.name %></td>
+        <td><%= comment.comment %></td>
+        <% if user_signed_in? %>
+          <td><%= link_to 'Delete Comment', comment, method: :delete, data: { confirm: 'Are you sure?', blog_id: :blog_id } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br><br><br>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div class="pad-bottom">
+  <a id="add_comment" class="button">
+	Click to Add a Comment about this Blog
+  </a>
+  <div id="profile-information" class="hidden">
+    <div class="row pad-top">
+      <div class="col-xs-6 col-sm-6 field-row">
+        <%= form_with(model: @blog.comments.new, local: true) do |form| %>
+		  <div class="field">
+		  	<%= form.hidden_field :blog_id %>
+		    <%= form.label :name %>
+		    <%= form.text_field :name %>
+		  </div>
+
+		  <div class="field">
+		    <%= form.label :comment %>
+		    <%= form.text_area :comment %>
+		  </div>
+
+		  <div class="actions">
+		    <%= form.submit %>
+		  </div>
+	    <% end %>
+      </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#add_comment').click(function(){
+      $('#profile-information').toggle();
+    });
+  });
+</script>
+ 

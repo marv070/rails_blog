@@ -14,8 +14,9 @@
       <tr>
         <td><%= blog.title %></td>
         <td><%= blog.body %></td>
-        <% if user_signed_in? %>
+        <td><%= blog.comments.count %>comments</td>
           <td><%= link_to 'Show', blog %></td>
+          <% if user_signed_in? %>
           <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
           <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%end%>
