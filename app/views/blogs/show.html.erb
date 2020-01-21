@@ -11,28 +11,29 @@
 <%= link_to 'Edit Blog Body', edit_blog_path(@blog) %> |
 <%= link_to 'Back to List of Blogs', blogs_path %>
 
+<% if @blog.comments.count > 0 %>
+	<h3>User Comments about this Blog</h3>
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Submitted By:</th>
+	      <th>Comment:</th>
+	    </tr>
+	  </thead>
 
-<h3>User Comments about this Blog</h3>
-<table>
-  <thead>
-    <tr>
-      <th>Submitted By:</th>
-      <th>Comment:</th>
-    </tr>
-  </thead>
-
- <tbody>
-    <% @blog.comments.each do |comment| %>
-      <tr>
-        <td><%= comment.name %></td>
-        <td><%= comment.comment %></td>
-        <% if user_signed_in? %>
-          <td><%= link_to 'Delete Comment', comment, method: :delete, data: { confirm: 'Are you sure?', blog_id: :blog_id } %></td>
-        <%end%>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	 <tbody>
+	    <% @blog.comments.each do |comment| %>
+	      <tr>
+	        <td><%= comment.name %></td>
+	        <td><%= comment.comment %></td>
+	        <% if user_signed_in? %>
+	          <td><%= link_to 'Delete Comment', comment, method: :delete, data: { confirm: 'Are you sure?', blog_id: :blog_id } %></td>
+	        <%end%>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<%end%>
 <br><br><br>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -62,6 +63,9 @@
       </div>
   </div>
 </div>
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     $('#add_comment').click(function(){
