@@ -1,3 +1,4 @@
+<header><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script></header>
 <p>
   <strong>Title:</strong>
   <%= @blog.title %>
@@ -36,7 +37,7 @@
 <%end%>
 <br><br><br>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <div class="pad-bottom">
   <a id="add_comment" class="button">
 	Click to Add a Comment about this Blog
@@ -67,10 +68,17 @@
 
 
 <script type="text/javascript">
-$(document).ready(function(){
-    $('#add_comment').click(function(){
+$(function() {
+  initPage();
+});
+$(window).bind('page:change', function() {
+  initPage();
+});
+function initPage() {
+  // Page ready code...
+  $('#add_comment').click(function(){
       $('#profile-information').toggle();
     });
-  });
+}
 </script>
  
