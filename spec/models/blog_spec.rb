@@ -26,7 +26,7 @@ RSpec.describe Blog, type: :model do
   		Blog.new(title: 'another cool title3', body: 'info about title for my blog').save
   	end
 
-  	it 'adds 4 new blogs' do
+  	it 'adds 4 new blogs if uniq title and body present' do
   		expect(Blog.count).to eq 4
   	end
 

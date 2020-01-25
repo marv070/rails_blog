@@ -37,7 +37,8 @@ group :development, :test do
   gem 'faker'
   gem 'bullet'
   gem 'pry'
-  gem 'rspec-rails'
+  # gem 'rspec-rails'
+  gem 'rspec-rails', '~> 4.0.0.beta3'
 end
 
 group :development do
